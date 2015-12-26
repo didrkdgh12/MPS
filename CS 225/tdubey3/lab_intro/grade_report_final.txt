@@ -1,0 +1,22 @@
+Grading revision r2007 by tdubey3, dated 2015-08-28 18:35:42.000180393 -0500 CDT
+Monad Autograder
+Testing lab_intro at 2015-08-31 00:46:56
+
+"It'll work, the stack's just not big enough." ~ Eric Rosenberg
+
+Setting up test environment...
+Compiling...
+================================================================
+
+
+Running tests...
+================================================================
+testBrighten  . [33 pts] - passed
+testCrosshairs  [33 pts] - passed
+testBlendImages [34 pts] - passed
+
+
+Total score...
+================================================================
+TOTAL SCORE: 100
+

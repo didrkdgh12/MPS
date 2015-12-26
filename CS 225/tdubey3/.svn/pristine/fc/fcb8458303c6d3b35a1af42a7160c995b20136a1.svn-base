@@ -1,0 +1,321 @@
+Grading revision r34383 by tolar2, dated 2015-10-29 01:12:47.000799491 -0500 CDT
+Monad Autograder
+Testing mp5 at 2015-10-30 00:42:59
+
+"Doing more things faster is no substitute for doing the right things." ~ Stephen R. Covey
+
+Setting up test environment...
+Compiling...
+================================================================
+unit_tests.cpp:177:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(0, 0));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:188:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(0, 1));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:199:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(9, 9));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:210:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(302, 178));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:271:15: error: no member named 'getPixel' in 'Quadtree'
+        return tree->getPixel(util::urand() % smallwidth, util::urand() % smallwidth);
+               ~~~~  ^
+unit_tests.cpp:322:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:330:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:340:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:350:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:351:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:360:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(13);
+        ~~~~~ ^
+unit_tests.cpp:368:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(200000);
+        ~~~~~ ^
+unit_tests.cpp:376:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(0);
+        ~~~~~ ^
+unit_tests.cpp:384:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:394:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:403:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:404:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:414:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:416:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(76, 204));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+unit_tests.cpp:177:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(0, 0));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:188:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(0, 1));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:199:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(9, 9));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:210:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(302, 178));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:271:15: error: no member named 'getPixel' in 'Quadtree'
+        return tree->getPixel(util::urand() % smallwidth, util::urand() % smallwidth);
+               ~~~~  ^
+unit_tests.cpp:322:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:330:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:340:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:350:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:351:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:360:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(13);
+        ~~~~~ ^
+unit_tests.cpp:368:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(200000);
+        ~~~~~ ^
+unit_tests.cpp:376:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(0);
+        ~~~~~ ^
+unit_tests.cpp:384:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:394:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:403:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:404:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:414:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:416:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(76, 204));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+ld: no input files
+unit_tests.cpp:177:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(0, 0));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:188:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(0, 1));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:199:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(9, 9));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:210:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(302, 178));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:271:15: error: no member named 'getPixel' in 'Quadtree'
+        return tree->getPixel(util::urand() % smallwidth, util::urand() % smallwidth);
+               ~~~~  ^
+unit_tests.cpp:322:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:330:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:340:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:350:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:351:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:360:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(13);
+        ~~~~~ ^
+unit_tests.cpp:368:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(200000);
+        ~~~~~ ^
+unit_tests.cpp:376:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(0);
+        ~~~~~ ^
+unit_tests.cpp:384:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:394:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:403:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:404:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:414:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:416:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(76, 204));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+unit_tests.cpp:177:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(0, 0));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:188:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(0, 1));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:199:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(9, 9));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:210:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(302, 178));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+unit_tests.cpp:271:15: error: no member named 'getPixel' in 'Quadtree'
+        return tree->getPixel(util::urand() % smallwidth, util::urand() % smallwidth);
+               ~~~~  ^
+unit_tests.cpp:322:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:330:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:340:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:350:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:351:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:360:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(13);
+        ~~~~~ ^
+unit_tests.cpp:368:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(200000);
+        ~~~~~ ^
+unit_tests.cpp:376:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(0);
+        ~~~~~ ^
+unit_tests.cpp:384:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:394:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:403:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:404:8: error: no member named 'clockwiseRotate' in 'Quadtree'
+        first.clockwiseRotate();
+        ~~~~~ ^
+unit_tests.cpp:414:8: error: no member named 'prune' in 'Quadtree'
+        first.prune(10000);
+        ~~~~~ ^
+unit_tests.cpp:416:28: error: no member named 'getPixel' in 'Quadtree'
+        ASSERT_EQUALS(soln, first.getPixel(76, 204));
+                            ~~~~~ ^
+./proxy.h:318:62: note: expanded from macro 'ASSERT_EQUALS'
+                std::string errormsg = proxy::assert_equals_help(expected, actual, #expected, #actual);  \
+                                                                           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+ld: no input files
+clang-3.5: error: no such file or directory: 'unit_tests.o'
+make: *** [proxy] Error 1
+make: *** Waiting for unfinished jobs....
+
+
+Running tests...
+================================================================
+Could not execute test cases
+
+
+Total score...
+================================================================
+TOTAL SCORE: 0
+

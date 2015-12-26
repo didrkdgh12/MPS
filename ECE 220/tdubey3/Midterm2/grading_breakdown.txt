@@ -1,0 +1,2 @@
+NetID;Question 1 (30 pts);Comment;Question 2 (30 pts);Comment;Question 3 (30 pts);Comment;Question 4 (10 pts);Total
+tdubey3;30;All test cases work;30;1,1,6,4,2,2,2,4,4,4;25;recursive. passes 4 test cases.;5;90

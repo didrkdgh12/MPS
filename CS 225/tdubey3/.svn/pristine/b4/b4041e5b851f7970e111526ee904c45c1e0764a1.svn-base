@@ -1,0 +1,27 @@
+Grading revision r13360 by tdubey3, dated 2015-09-17 16:53:27.000170598 -0500 CDT
+Monad Autograder
+Testing lab_inheritance at 2015-09-21 01:07:02
+
+"The trouble with programmers is that you can never tell what a programmer is doing until it's too late." ~ Seymour Cray
+
+Setting up test environment...
+Compiling...
+================================================================
+
+
+Running tests...
+================================================================
+test_virtual_perim  . . . . . . [10 pts] - passed
+test_virtual_area . . . . . . . [10 pts] - passed
+test_destructor (asan)  . . . . [20 pts] - passed
+test_constructor  . . . . . . . [10 pts] - passed
+test_drawable_destructor (asan) [10 pts] - passed
+test_truck_draw . . . . . . . . [10 pts] - passed
+test_slicing  . . . . . . . . . [20 pts] - passed
+test_flower_destructor (asan) . [10 pts] - passed
+
+
+Total score...
+================================================================
+TOTAL SCORE: 100
+

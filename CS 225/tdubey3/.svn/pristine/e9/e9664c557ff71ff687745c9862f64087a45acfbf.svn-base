@@ -1,0 +1,285 @@
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <cstdlib>
+#include <iostream>
+#include <sys/time.h>
+#include <time.h>
+#include "maze.h"
+#include "dsets.h"
+
+#define UP 3
+#define DOWN 1
+#define LEFT 2
+#define RIGHT 0
+#define DEBUG false
+
+using namespace std;
+
+SquareMaze::SquareMaze(){
+	widthMaze = 0;
+	heightMaze = 0;
+	downVec.clear();
+	rightVec.clear();
+	end = -1;
+}
+
+void SquareMaze::makeMaze(int width, int height) {
+	srand(time(NULL));
+	widthMaze = width;
+	heightMaze = height;
+	downVec.clear();
+	rightVec.clear();
+	downVec = vector<bool>(widthMaze*heightMaze, true);
+	rightVec = vector<bool>(widthMaze*heightMaze, true);
+
+	DisjointSets dset;
+	dset.addelements(widthMaze*heightMaze);
+
+	int visited = 0;
+	while(visited < (widthMaze*heightMaze)-1) {
+		for (int i = 0; i < widthMaze*heightMaze; i++) {
+			if(random()*10%100/(float)100.0 > 0.9) {
+				continue;
+			}
+			bool rando = (rand()%10 > 4);
+			if((rando && (i % widthMaze + 1) == widthMaze) || (!rando && (i / widthMaze + 1) == heightMaze) || (rando && (dset.find(i) == dset.find(i + 1))) || (!rando && (dset.find(i) == dset.find(i + widthMaze)))) {
+				continue;
+			}
+			if(rando) {
+				dset.setunion(i, i + 1);
+				visited++;
+				rightVec[i] = false;
+			} else {
+				dset.setunion(i, i + widthMaze);
+				visited++;
+				downVec[i] = false;				
+			}
+		}
+	}
+}
+
+bool SquareMaze::inbounds(int index) const{
+	return (index < widthMaze * heightMaze) && (index >= 0);
+}
+
+void SquareMaze::breakWall(int index, int dir) {
+	//Right Wall
+	// if(dir == 0) {
+	// 	if(maze[index] == 2){
+	// 		maze[index] = 2;
+	// 	} else {
+	// 		maze[index] = 1;
+	// 	}
+	// }
+	// //Down Wall
+	// if(dir == 1) {
+	// 	if(maze[index] == 1){
+	// 		maze[index] = 2;
+	// 	} else {
+	// 		maze[index] = 2;
+	// 	}
+	// }
+}
+
+bool SquareMaze::canTravel(int x, int y, int dir) const {
+	int index = y *widthMaze + x;
+	if((x < 0)||(y < 0)||(x >= widthMaze)||(y >= heightMaze)) {
+		return false;
+	}
+	if((dir == 0 && x == widthMaze - 1) || (dir == 1 && y == heightMaze - 1) || (dir == 2 && x == 0) || (dir == 3 && y == 0)) {
+		return false;
+	}
+	if(dir == 0){
+		return (!rightVec[index]);
+	}
+	if(dir == 1) {
+		return (!downVec[index]);
+	}
+	if(dir == 2) {
+		return (!rightVec[index - 1]);
+	}
+	if(dir == 3) {
+		return (!downVec[index - widthMaze]);
+	}
+	return false;
+}
+
+void SquareMaze::setWall(int x, int y, int dir, bool exists) {
+	return;
+}
+
+vector<int> SquareMaze::solveMaze() {
+	vector<int> ret;
+	vector<int> length(widthMaze*heightMaze, -1);
+	vector<int> path(widthMaze*heightMaze, -1);
+	vector<int> parent(widthMaze*heightMaze, -1);
+	queue<int> bfdQueue;
+	bfdQueue.push(0);
+
+	vector<int> out;
+	while(!bfdQueue.empty()) {
+		int idx = bfdQueue.front();
+		int x = idx % widthMaze;
+		int y = idx / widthMaze;
+
+		if(canTravel(x, y, 0)) {
+			if(length[idx + 1] < 0 ) {
+				length[idx + 1] = length[idx] + 1;
+				path[idx + 1] = 0;
+				parent[idx + 1] = idx;
+				bfdQueue.push(idx + 1);
+			} 
+		}
+
+		if(canTravel(x, y, 1)) {
+			if(length[idx + widthMaze] < 0 ) {
+				length[idx + widthMaze] = length[idx] + 1;
+				path[idx + widthMaze] = 1;
+				parent[idx + widthMaze] = idx;
+				bfdQueue.push(idx + widthMaze);
+			} 
+		}
+
+		if(canTravel(x, y, 2)) {
+			if(length[idx - 1] < 0 ) {
+				length[idx - 1] = length[idx] + 1;
+				path[idx - 1] = 2;
+				parent[idx - 1] = idx;
+				bfdQueue.push(idx - 1);
+			} 
+		}
+
+		if(canTravel(x, y, 3)) {
+			if(length[idx - widthMaze] < 0 ) {
+				length[idx - widthMaze] = length[idx] + 1;
+				path[idx - widthMaze] = 3;
+				parent[idx - widthMaze] = idx;
+				bfdQueue.push(idx - widthMaze);
+			} 
+		}
+		bfdQueue.pop();
+	}
+	int distance = -1;
+	for(int i = widthMaze * (heightMaze - 1); i < widthMaze*heightMaze; i++) {
+		int tempDistance = length[i];
+		if(tempDistance > distance) {
+			distance = tempDistance;
+			end = i;
+		}
+	}
+
+	int temp = end;
+	while(temp > 0) {
+		out.push_back(path[temp]);
+		temp = parent[temp];
+	}
+
+	ret.clear();
+
+	while(!out.empty()) {
+		ret.push_back(out.back());
+		out.pop_back();
+	}
+	return ret;
+}
+
+PNG* SquareMaze::drawMaze() const {
+	int imgWidth = widthMaze*10+1;
+	int imgHeight = heightMaze*10+1;
+	PNG* ret = new PNG(imgWidth, imgHeight);
+	int cells = widthMaze*heightMaze;
+
+	//Set top edge
+	for(int i = 0; i < imgWidth; i++) {
+		if(i > 0 && i < 10) {
+			//Do nothing...
+		} else {
+			*(*ret)(i, 0) = RGBAPixel(0,0,0);
+		}
+	}
+
+	//Set left edge
+	for(int i = 0; i < imgHeight; i++) {
+		*(*ret)(0, i) = RGBAPixel(0,0,0);
+	}
+
+	//Aaaannnnddd draw!
+	for(int i = 0; i < cells; i++) {
+		int x = i % widthMaze;
+		int y = i / widthMaze;
+		if(rightVec[i]) {
+			for(int k = 0; k < 11; k++){
+				*(*ret)((x+1)*10,y*10+k) = RGBAPixel(0,0,0);
+			}
+		}
+		if(downVec[i]) {
+			for(int k = 0; k < 11; k++){
+				*(*ret)(x*10+k,(y+1)*10) = RGBAPixel(0,0,0);
+			}
+		}	
+	}
+	return ret;
+}
+
+PNG* SquareMaze::drawMazeWithSolution() {
+	PNG* ret = drawMaze();
+	vector<int> solution = solveMaze();
+	
+	int x = 5;
+	int y = 5;
+
+	for(int i = 0; i < (int)solution.size(); i++) {
+		if(solution[i] == 0) {
+			for(int k = 0; k < 11; k++) {
+				(*ret)(x+k,y)->red = 255;
+				(*ret)(x+k,y)->green = 0;
+				(*ret)(x+k,y)->blue = 0;
+			}
+			x = x + 10;
+		}
+		if(solution[i] == 1) {
+			for(int k = 0; k < 11; k++) {
+				(*ret)(x,y+k)->red = 255;
+				(*ret)(x,y+k)->green = 0;
+				(*ret)(x,y+k)->blue = 0;
+			}
+			y = y + 10;
+		}
+		if(solution[i] == 2) {
+			for(int k = 0; k < 11; k++) {
+				(*ret)(x-k,y)->red = 255;
+				(*ret)(x-k,y)->green = 0;
+				(*ret)(x-k,y)->blue = 0;
+			}
+			x = x - 10;
+		}
+		if(solution[i] == 3) {
+			for(int k = 0; k < 11; k++) {
+				(*ret)(x,y-k)->red = 255;
+				(*ret)(x,y-k)->green = 0;
+				(*ret)(x,y-k)->blue = 0;
+			}
+			y = y - 10;
+		}
+	}
+	int eX = end % widthMaze;
+	int eY = end / widthMaze;
+	for(int k = 1; k < 10; k++) {
+		(*ret)(x+k,y)->red = 255;
+		(*ret)(x+k,y)->green = 255;
+		(*ret)(x+k,y)->blue = 255;
+	}
+
+	return ret;
+}
+
+int SquareMaze::rangeRandom (int min, int max) {
+    int n = max - min + 1;
+    int remin = RAND_MAX % n;
+    int x;
+    do{
+        x = rand();
+    }while (x >= RAND_MAX - remin);
+    return min + x % n;
+}

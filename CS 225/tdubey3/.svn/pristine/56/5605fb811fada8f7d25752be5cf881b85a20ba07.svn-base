@@ -1,0 +1,27 @@
+Grading revision r37072 by tdubey3, dated 2015-11-01 16:08:55.00062874 -0600 CST
+Monad Autograder
+Testing lab_avl at 2015-11-02 00:37:42
+
+"Now that's just math for math's sake." ~ Prof. Julia Hockenmaier
+
+Setting up test environment...
+Compiling...
+================================================================
+
+
+Running tests...
+================================================================
+test_oneElement  . . . [10 pts] - passed
+test_simpleRotateLeft  [10 pts] - passed
+test_simpleRotateRight [10 pts] - passed
+test_threeLeftRotates  [10 pts] - passed
+test_threeRightRotates [10 pts] - passed
+test_manyRotations . . [20 pts] - passed
+test_manyInserts . . . [20 pts] - passed
+test_valgrind (asan) . [10 pts] - passed
+
+
+Total score...
+================================================================
+TOTAL SCORE: 100
+

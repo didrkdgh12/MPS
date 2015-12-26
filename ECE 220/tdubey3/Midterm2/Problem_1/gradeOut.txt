@@ -1,0 +1,34 @@
+reverseArray, Test 1  inArray before: 1 2 3 4 5 
+outArray student: 5 4 3 2 1   outArray gold: 5 4 3 2 1   Test 1 Correct
+reverseArray, Test 2  inArray before: 1 
+outArray student: 1   outArray gold: 1   Test 2 Correct
+reverseArray, Test 3  inArray before: 1 2 3 4 
+outArray student: 4 3 2 1   outArray gold: 4 3 2 1   Test 3 Correct
+reverseArray, Test 4  inArray before: 1 2 3 4 5 6 7 
+outArray student: 7 6 5 4 3 2 1   outArray gold: 7 6 5 4 3 2 1   Test 4 Correct
+*****reverseArray passed 4/4 cases*****
+
+insertArray, Test 1, Position=2  inArray before: 1 2 3 4 5  subArray: 7 8 9 
+inArray after (student): 1 2 7 8 9   inArray after (gold): 1 2 7 8 9 
+ return value student: 1  return value gold: 1  Test 1 Correct
+insertArray, Test 2, Position=4  inArray before: 1 2 3 4 5  subArray: 7 8 9 
+inArray after (student): 1 2 3 4 5   inArray after (gold): 1 2 3 4 5 
+ return value student: 0  return value gold: 0  Test 2 Correct
+insertArray, Test 3, Position=4  inArray before: 1 2 3 4 5  subArray: 7 
+inArray after (student): 1 2 3 4 7   inArray after (gold): 1 2 3 4 7 
+ return value student: 1  return value gold: 1  Test 3 Correct
+insertArray, Test 4, Position=0  inArray before: 1 2 3 4 5  subArray: 6 7 8 
+inArray after (student): 6 7 8 4 5   inArray after (gold): 6 7 8 4 5 
+ return value student: 1  return value gold: 1  Test 4 Correct
+*****insertArray passed 4/4 cases***** 
+
+isInArray, Test 1  inArray: 1 2 3 4 5  subArray: 3 8 9 
+Return Value Student: -1 Return Value Gold: -1  Test 1 Correct
+isInArray, Test 2  inArray: 1 2 3 4 5  subArray: 3 4 
+Return Value Student: 2 Return Value Gold: 2  Test 2 Correct
+isInArray, Test 3  inArray: 1 2 3 4 5  subArray: 3 
+Return Value Student: 2 Return Value Gold: 2  Test 3 Correct
+isInArray, Test 4  inArray: 1 2 3 4 5  subArray: 4 3 
+Return Value Student: -1 Return Value Gold: -1  Test 4 Correct
+*****isInArray passed 4/4 cases*****
+ 

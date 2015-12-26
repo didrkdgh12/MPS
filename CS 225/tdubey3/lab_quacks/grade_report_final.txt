@@ -1,0 +1,103 @@
+Grading revision r22071 by tdubey3, dated 2015-10-03 22:17:06.000762989 -0500 CDT
+Monad Autograder
+Testing lab_quacks at 2015-10-05 00:46:28
+
+"The slogan of Subversion for a while was "CVS done right", or something like that, and if you start with that kind of slogan, there's nowhere you can go. There is no way to do CVS right." ~ Linus Torvalds
+
+Setting up test environment...
+Compiling...
+================================================================
+In file included from unit_tests.cpp:13:
+In file included from ./quackfun.h:30:
+./quackfun.cpp:82:7: error: object of type 'std::queue<int, std::__1::deque<int, std::__1::allocator<int> > >' cannot be assigned because its copy assignment operator is implicitly deleted
+    q = q2;
+      ^
+unit_tests.cpp:116:12: note: in instantiation of function template specialization 'QuackFun::scramble<int>' requested here
+        QuackFun::scramble<int>(q);
+                  ^
+./queue:18:13: note: copy assignment operator is implicitly deleted because 'queue<int, std::__1::deque<int, std::__1::allocator<int> > >' has a user-declared move constructor
+            queue(queue&& q) : libcpp_queue_0xdeadbeef_is_a_tasty_treat<T, Container>(q) { _ctor_count ++; };
+            ^
+1 error generated.
+In file included from unit_tests.cpp:13:
+In file included from ./quackfun.h:30:
+./quackfun.cpp:82:7: error: object of type 'std::queue<int, std::__1::deque<int, std::__1::allocator<int> > >' cannot be assigned because its copy assignment operator is implicitly deleted
+    q = q2;
+      ^
+unit_tests.cpp:116:12: note: in instantiation of function template specialization 'QuackFun::scramble<int>' requested here
+        QuackFun::scramble<int>(q);
+                  ^
+./queue:18:13: note: copy assignment operator is implicitly deleted because 'queue<int, std::__1::deque<int, std::__1::allocator<int> > >' has a user-declared move constructor
+            queue(queue&& q) : libcpp_queue_0xdeadbeef_is_a_tasty_treat<T, Container>(q) { _ctor_count ++; };
+            ^
+1 error generated.
+In file included from unit_tests.cpp:13:
+In file included from ./quackfun.h:30:
+./quackfun.cpp:82:7: error: object of type 'std::queue<int, std::__1::deque<int, std::__1::allocator<int> > >' cannot be assigned because its copy assignment operator is implicitly deleted
+    q = q2;
+      ^
+unit_tests.cpp:116:12: note: in instantiation of function template specialization 'QuackFun::scramble<int>' requested here
+        QuackFun::scramble<int>(q);
+                  ^
+./queue:18:13: note: copy assignment operator is implicitly deleted because 'queue<int, std::__1::deque<int, std::__1::allocator<int> > >' has a user-declared move constructor
+            queue(queue&& q) : libcpp_queue_0xdeadbeef_is_a_tasty_treat<T, Container>(q) { _ctor_count ++; };
+            ^
+1 error generated.
+In file included from unit_tests.cpp:13:
+In file included from ./quackfun.h:30:
+./quackfun.cpp:82:7: error: object of type 'std::queue<int, std::__1::deque<int, std::__1::allocator<int> > >' cannot be assigned because its copy assignment operator is implicitly deleted
+    q = q2;
+      ^
+unit_tests.cpp:142:12: note: in instantiation of function template specialization 'QuackFun::scramble<int>' requested here
+        QuackFun::scramble<int>(q);
+                  ^
+./queue:18:13: note: copy assignment operator is implicitly deleted because 'queue<int, std::__1::deque<int, std::__1::allocator<int> > >' has a user-declared move constructor
+            queue(queue&& q) : libcpp_queue_0xdeadbeef_is_a_tasty_treat<T, Container>(q) { _ctor_count ++; };
+            ^
+1 error generated.
+In file included from unit_tests.cpp:13:
+In file included from ./quackfun.h:30:
+./quackfun.cpp:82:7: error: object of type 'std::queue<int, std::__1::deque<int, std::__1::allocator<int> > >' cannot be assigned because its copy assignment operator is implicitly deleted
+    q = q2;
+      ^
+unit_tests.cpp:116:12: note: in instantiation of function template specialization 'QuackFun::scramble<int>' requested here
+        QuackFun::scramble<int>(q);
+                  ^
+./queue:18:13: note: copy assignment operator is implicitly deleted because 'queue<int, std::__1::deque<int, std::__1::allocator<int> > >' has a user-declared move constructor
+            queue(queue&& q) : libcpp_queue_0xdeadbeef_is_a_tasty_treat<T, Container>(q) { _ctor_count ++; };
+            ^
+1 error generated.
+In file included from unit_tests.cpp:13:
+In file included from ./quackfun.h:30:
+./quackfun.cpp:82:7: error: object of type 'std::queue<int, std::__1::deque<int, std::__1::allocator<int> > >' cannot be assigned because its copy assignment operator is implicitly deleted
+    q = q2;
+      ^
+unit_tests.cpp:142:12: note: in instantiation of function template specialization 'QuackFun::scramble<int>' requested here
+        QuackFun::scramble<int>(q);
+                  ^
+./queue:18:13: note: copy assignment operator is implicitly deleted because 'queue<int, std::__1::deque<int, std::__1::allocator<int> > >' has a user-declared move constructor
+            queue(queue&& q) : libcpp_queue_0xdeadbeef_is_a_tasty_treat<T, Container>(q) { _ctor_count ++; };
+            ^
+1 error generated.
+
+
+Running tests...
+================================================================
+verifySame_no_modify [15 pts] - passed
+verifySame_result  . [10 pts] - passed
+sum_floats . . . . . [20 pts] - passed
+sum_136  . . . . . . [20 pts] - passed
+triangle_0 . . . . . [2 pts]  - passed
+triangle_1 . . . . . [2 pts]  - passed
+triangle_5 . . . . . [3 pts]  - passed
+triangle_10  . . . . [3 pts]  - passed
+sumDigits_762  . . . [3 pts]  - passed
+sumDigits_0  . . . . [2 pts]  - passed
+sumDigits_2  . . . . [2 pts]  - passed
+sumDigits_1024 . . . [3 pts]  - passed
+
+
+Total score...
+================================================================
+TOTAL SCORE: 85
+

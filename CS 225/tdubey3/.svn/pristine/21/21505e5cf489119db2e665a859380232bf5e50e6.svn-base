@@ -1,0 +1,259 @@
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <cstdlib>
+#include <iostream>
+#include <sys/time.h>
+#include <time.h>
+#include "maze.h"
+#include "dsets.h"
+
+#define UP 3
+#define DOWN 1
+#define LEFT 2
+#define RIGHT 0
+#define DEBUG true
+
+using namespace std;
+
+void SquareMaze::makeMaze(int width, int height) {
+	//srand(time(NULL));
+	//Set the width and height of the maze
+	widthMaze = width;
+	heightMaze = height;
+
+	//Fill the maze completely with filled cells
+	for(int i = 0; i < width*height; i++) {
+		maze.push_back(3);
+	}
+
+	vector<int> inMaze;
+	vector<int> frontier;
+
+	int posX = rangeRandom(0, widthMaze);
+	int posY = rangeRandom(0, heightMaze);
+	int index = widthMaze * posX + posY;
+
+
+	inMaze.push_back(index);
+	for(int i = 0; i < 4; i++){
+		switch(i) {
+			case UP:
+				if(inbounds(index - widthMaze)){
+					frontier.push_back(index - widthMaze);
+				}
+				break;
+			case DOWN:
+				if(inbounds(index + widthMaze)){
+					frontier.push_back(index + widthMaze);
+				}
+				break;
+			case LEFT:
+				if(inbounds(index - 1)){
+					frontier.push_back(index -1);
+				}
+				break;
+			case RIGHT:
+				if(inbounds(index + 1)){
+					frontier.push_back(index + 1);
+				}
+				break;
+		}
+	}
+	int steps = 0;
+	if(DEBUG){
+		PNG* unsolved = drawMaze();
+	   	unsolved->writeToFile("unsolved" +to_string(steps)+ ".png" );
+   	}
+	while(!frontier.empty()) {
+
+		int randomFrontierCellIndex = rangeRandom(0, frontier.size()-1);
+		int randomFrontierCell = frontier[randomFrontierCellIndex];
+
+		bool foundAdj = false;
+		while(!foundAdj){
+			int i = rangeRandom(0,3);
+			switch(i) {
+				case UP:
+					if(inbounds(randomFrontierCell - widthMaze)){
+						if(std::find(inMaze.begin(), inMaze.end(), (randomFrontierCell - widthMaze)) != inMaze.end()) {
+							foundAdj = true;
+							breakWall(randomFrontierCell - widthMaze, 1);
+						}
+					}
+					break;
+				case DOWN:
+					if(inbounds(randomFrontierCell + widthMaze)){
+						if(std::find(inMaze.begin(), inMaze.end(), (randomFrontierCell + widthMaze)) != inMaze.end()) {
+							foundAdj = true;
+							breakWall(randomFrontierCell, 1);
+						}
+					}
+					break;
+				case LEFT:
+					if(inbounds(randomFrontierCell - 1)){
+						if(std::find(inMaze.begin(), inMaze.end(), (randomFrontierCell - 1)) != inMaze.end()) {
+							foundAdj = true;
+							breakWall(randomFrontierCell - 1, 0);
+						}
+					}
+					break;
+				case RIGHT:
+					if(inbounds(randomFrontierCell + 1)){
+						if(std::find(inMaze.begin(), inMaze.end(), (randomFrontierCell + 1)) != inMaze.end()) {
+							foundAdj = true;
+							breakWall(randomFrontierCell, 0);
+						}
+					}
+					break;
+			}
+		}
+
+		inMaze.push_back(randomFrontierCell);
+
+		for(int i = 0; i < 4; i++) {
+			switch(i) {
+				case UP:
+					if(inbounds(randomFrontierCell - widthMaze)){
+						if(std::find(inMaze.begin(), inMaze.end(), (randomFrontierCell - widthMaze)) == inMaze.end()) {
+							frontier.push_back(randomFrontierCell - widthMaze);
+						}
+					}
+					break;
+				case DOWN:
+					if(inbounds(randomFrontierCell + widthMaze)){
+						if(std::find(inMaze.begin(), inMaze.end(), (randomFrontierCell + widthMaze)) == inMaze.end()) {
+							frontier.push_back(randomFrontierCell + widthMaze);
+						}
+					}
+					break;
+				case LEFT:
+					if(inbounds(randomFrontierCell - 1)){
+						if(std::find(inMaze.begin(), inMaze.end(), (randomFrontierCell - 1)) == inMaze.end()) {
+							frontier.push_back(randomFrontierCell - 1);
+						}
+					}
+					break;
+				case RIGHT:
+					if(inbounds(randomFrontierCell + 1)){
+						if(std::find(inMaze.begin(), inMaze.end(), (randomFrontierCell + 1)) == inMaze.end()) {
+							frontier.push_back(randomFrontierCell + 1);
+						}
+					}
+					break;
+			}
+		}
+		frontier.erase(frontier.begin() + randomFrontierCellIndex);
+		steps++;
+		if(DEBUG){
+			PNG* unsolved = drawMaze();
+   			unsolved->writeToFile("unsolved" +to_string(steps)+ ".png" );
+		}
+		
+	} 
+}
+
+bool SquareMaze::inbounds(int index) {
+	return (index < widthMaze * heightMaze) && (index >= 0);
+}
+
+void SquareMaze::breakWall(int index, int dir) {
+	//Right Wall
+	if(dir == 0) {
+		if(maze[index] == 2){
+			maze[index] = 0;
+		} else {
+			maze[index] = 1;
+		}
+	}
+	//Down Wall
+	if(dir == 1) {
+		if(maze[index] == 1){
+			maze[index] = 0;
+		} else {
+			maze[index] = 2;
+		}
+	}
+}
+
+bool SquareMaze::canTravel(int x, int y, int dir) const {
+	return false;
+}
+
+void SquareMaze::setWall(int x, int y, int dir, bool exists) {
+	return;
+}
+
+vector<int> SquareMaze::solveMaze() {
+	return vector<int>();
+}
+
+PNG* SquareMaze::drawMaze() const {
+	int imgWidth = widthMaze*10+1;
+	int imgHeight = heightMaze*10+1;
+	PNG* ret = new PNG(imgWidth, imgHeight);
+
+	//Set top edge
+	for(int i = 0; i < imgWidth; i++) {
+		if(i > 0 && i < 10) {
+			//Do nothing...
+		} else {
+			*(*ret)(i, 0) = RGBAPixel(0,0,0);
+		}
+	}
+
+	//Set left edge
+	for(int i = 0; i < imgHeight; i++) {
+		*(*ret)(0, i) = RGBAPixel(0,0,0);
+	}
+
+	//Aaaannnnddd draw!
+	for(int x = 0; x < widthMaze; x++) {
+		for(int y = 0; y < heightMaze; y++) {
+			int currentIndex = widthMaze * x + y;
+			//Fill in based on type
+			if(maze[currentIndex] == 3) {
+				//Draw both down and right
+				//Right
+				for(int k = 0; k < 11; k++) {
+					*(*ret)((x+1)*10,y*10+k) = RGBAPixel(0,0,0);
+				}
+				//Down
+				for(int k = 0; k < 11; k++) {
+					*(*ret)(x*10+k, (y+1)*10) = RGBAPixel(0,0,0);
+				}
+
+			} else if(maze[currentIndex] == 2) {
+				//Draw right only
+				for(int k = 0; k < 11; k++) {
+					*(*ret)((x+1)*10,y*10+k) = RGBAPixel(0,0,0);
+				}
+			} else if(maze[currentIndex] == 1) {
+				//Draw down only
+				for(int k = 0; k < 11; k++) {
+					*(*ret)(x*10+k, (y+1)*10) = RGBAPixel(0,0,0);
+				}
+			} else {
+				//Do nothing..
+			}
+		}
+	}
+	return ret;
+}
+
+PNG* SquareMaze::drawMazeWithSolution() {
+	int imgWidth = widthMaze*10+1;
+	int imgHeight = heightMaze*10+1;
+	PNG* ret = new PNG(imgWidth, imgHeight);
+	return ret;
+}
+
+int SquareMaze::rangeRandom (int min, int max) {
+    int n = max - min + 1;
+    int remin = RAND_MAX % n;
+    int x;
+    do{
+        x = rand();
+    }while (x >= RAND_MAX - remin);
+    return min + x % n;
+}

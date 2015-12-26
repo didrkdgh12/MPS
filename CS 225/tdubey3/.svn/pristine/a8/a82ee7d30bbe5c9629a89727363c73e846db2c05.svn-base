@@ -1,0 +1,38 @@
+Exam report for tdubey3
+CS 225, Fall 2015, Midterm 2, Exam number 555, version 1
+
+ Num   Stu/Sol   Max   Score 
+----- --------- ----- -------
+   1    c / c    2.5    2.5
+   2    c / a    2.5    0.0
+   3    b / b    2.5    2.5
+   4    d / d    2.5    2.5
+   5    b / a    2.5    0.0
+   6    a / d    2.5    0.0
+   7    c / c    2.5    2.5
+   8    a / a    2.5    2.5
+   9    c / c    2.5    2.5
+  10    d / c    2.5    0.0
+  11    a / a    2.5    2.5
+  12    d / d    2.5    2.5
+  13    c / c    2.5    2.5
+  14    c / b    2.5    0.0
+  15    c / c    2.5    2.5
+  16    c / c    2.5    2.5
+  17    a / a    2.5    2.5
+  18    c / d    2.5    0.0
+  19    c / c    2.5    2.5
+  20    a / a    2.5    2.5
+  21             5.0    5.0  
+  22             5.0    5.0  
+  23             3.0    1.0  "Incorrect header, functionally inaccurate"
+  24             5.0    3.0  "Also need to call pushAll on temp->right, if it exists"
+  25             4.0    4.0  
+  26             5.0    5.0  
+  27             5.0    5.0  
+  28             5.0    5.0  
+  29             3.0    0.0  
+  30            10.0    6.0  "b, d, e, f"
+----- --------- ----- -------
+                100.0  74.0
+ Normalized score = 74.00

@@ -1,0 +1,17 @@
+# Tests case for load_scene
+
+camera position:(-20, 0, 8) view_angle:45 direction:(0,-45) resolution:(960,320)
+
+background color:(0.2, 0.2, 0.2)
+
+light position:(-10, 4, 8) color:(0.6,0.6,0.6)
+light position:(-8, 5, 8) color:(0.3,0.3,0.3)
+
+quad vertices:((-8, 12, -1), (2, 12, -1), (2, -12, -1)) diffuse:(0.6,0.6,0.6)
+
+sphere center:(0, 6, 0) radius:1 diffuse:(1.0, 0.6, 0.6)
+
+frustum centers:((0, 2, -1), (0, 2, 1)) radii:(1,0) specular:(1.0, 1.0, 0.6)
+
+circle center:(0, 2, -1) radius:1 normal:(0, 0, 1)  diffuse:(1.0, 1.0, 0.6)
+

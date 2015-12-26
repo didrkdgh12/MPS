@@ -1,0 +1,39 @@
+#include "dsets.h"
+
+using namespace std;
+
+void DisjointSets::addelements(int num) {
+    for (int i = 0; i < num; i++) {
+        _set.push_back(_set.size()-1);
+    }
+
+}
+
+int DisjointSets::find(int elem) {
+
+    //This method does not have path compression
+    // if(_set[elem] < 0) {
+    //  return elem;
+    // } else {
+    //  return find(_set(elem));
+    // }
+
+    // Improved Method below, wth path compression
+    if(_set[elem] < 0) {
+        return elem;
+    } else {
+        _set[elem] = find(_set[elem]);
+        return _set[elem];
+    }
+}
+
+void DisjointSets::setunion(int a, int b) {
+    if (_set[b] < _set[a]) {                 // b has larger tree
+        _set[b] += _set[a];        // update # of items in b's tree
+        _set[a] = b;                       // make b parent of a
+    } else {                                  // a has equal or larger tree
+        _set[a] += _set[b];        // update # of items in a's tree
+        _set[b] = a;                       // make a parent of b
+    }
+
+}

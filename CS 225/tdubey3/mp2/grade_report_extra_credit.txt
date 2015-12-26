@@ -1,0 +1,64 @@
+Grading revision r7604 by tdubey3, dated 2015-09-08 23:38:06.000427557 -0500 CDT
+Monad Autograder
+Testing mp2.1 at 2015-09-09 01:40:04
+
+"(reading a password) Uppercase 0... [...] Lowercase 0..." ~ Sean Massung
+
+Setting up test environment...
+Compiling...
+================================================================
+image.cpp:5:22: warning: comparison of integers of different signs: 'int' and 'unsigned long' [-Wsign-compare]
+    for(int x = 0; x < (width()/2); x++) {
+                   ~ ^  ~~~~~~~~~
+image.cpp:6:26: warning: comparison of integers of different signs: 'int' and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+        for(int y = 0; y < height(); y++) {
+                       ~ ^ ~~~~~~~~
+image.cpp:16:22: warning: comparison of integers of different signs: 'int' and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+    for(int x = 0; x < width(); x++) {
+                   ~ ^ ~~~~~~~
+image.cpp:17:30: warning: comparison of integers of different signs: 'int' and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+            for(int y = 0; y < height(); y++) {
+                           ~ ^ ~~~~~~~~
+image.cpp:56:22: warning: comparison of integers of different signs: 'int' and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+    for(int x = 0; x < width(); x++) {
+                   ~ ^ ~~~~~~~
+image.cpp:57:26: warning: comparison of integers of different signs: 'int' and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+        for(int y = 0; y < height(); y++) {
+                       ~ ^ ~~~~~~~~
+6 warnings generated.
+image.cpp:5:22: warning: comparison of integers of different signs: 'int' and 'unsigned long' [-Wsign-compare]
+    for(int x = 0; x < (width()/2); x++) {
+                   ~ ^  ~~~~~~~~~
+image.cpp:6:26: warning: comparison of integers of different signs: 'int' and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+        for(int y = 0; y < height(); y++) {
+                       ~ ^ ~~~~~~~~
+image.cpp:16:22: warning: comparison of integers of different signs: 'int' and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+    for(int x = 0; x < width(); x++) {
+                   ~ ^ ~~~~~~~
+image.cpp:17:30: warning: comparison of integers of different signs: 'int' and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+            for(int y = 0; y < height(); y++) {
+                           ~ ^ ~~~~~~~~
+image.cpp:56:22: warning: comparison of integers of different signs: 'int' and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+    for(int x = 0; x < width(); x++) {
+                   ~ ^ ~~~~~~~
+image.cpp:57:26: warning: comparison of integers of different signs: 'int' and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+        for(int y = 0; y < height(); y++) {
+                       ~ ^ ~~~~~~~~
+6 warnings generated.
+
+
+Running tests...
+================================================================
+InvertColorsEven  . . [30 pts] - passed
+FlipLeftEven  . . . . [15 pts] - passed
+FlipLeftOdd . . . . . [15 pts] - passed
+AdjustBrightnessEven  [10 pts] - passed
+AdjustBrightnessEven2 [10 pts] - passed
+AdjustBrightnessEven3 [10 pts] - passed
+ImageMakefile . . . . [10 pts] - passed
+
+
+Total score...
+================================================================
+TOTAL SCORE: 100
+

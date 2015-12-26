@@ -1,0 +1,311 @@
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <cstdlib>
+#include <iostream>
+#include <sys/time.h>
+#include <time.h>
+#include "maze.h"
+#include "dsets.h"
+
+#define UP 3
+#define DOWN 1
+#define LEFT 2
+#define RIGHT 0
+#define DEBUG false
+
+using namespace std;
+
+SquareMaze::SquareMaze() {
+}
+
+SquareMaze::cell::cell():rightWall(true), downWall(true), visited(true) {
+}
+
+void SquareMaze::makeMaze(int width, int height) {
+	DisjointSets dset;
+
+	widthMaze = width;
+	heightMaze = height;
+
+	int area = widthMaze*heightMaze;
+
+	maze = new cell*[widthMaze];
+	for(int i = 0; i < widthMaze; i++) {
+		maze[i] = new cell[heightMaze];
+	}
+
+	dset.addelements(area);
+	int visitedCount = 0;
+	int posX, posY;
+
+	srand(time(NULL));
+
+	while(visitedCount != (area - 1)) {
+		posX = rand()%widthMaze;
+		posY = rand()%heightMaze;
+
+		bool flag = rand()%2;
+
+		if(flag && (posX+1 < widthMaze)) {
+			if((dset.find(posX * heightMaze + posY)) != (dset.find((posX + 1) * heightMaze + posY))) {
+				dset.setunion(dset.find(posX * heightMaze + posY), dset.find((posX + 1) * heightMaze + posY));
+				visitedCount = visitedCount + 1;
+				maze[posX][posY].rightWall = false;
+			}
+		} else if(!flag && (posY + 1 < heightMaze)) {
+			if((dset.find(posX * heightMaze + posY)) != (dset.find(posX * heightMaze + posY + 1))) {
+				dset.setunion(dset.find(posX * heightMaze + posY), dset.find(posX * heightMaze + posY + 1));
+				visitedCount = visitedCount + 1;
+				maze[posX][posY].downWall = false;
+			}
+		}
+	}
+}
+
+bool SquareMaze::canTravel(int x, int y, int dir) const {
+	switch(dir) {
+		case RIGHT:
+			if(x == widthMaze - 1) {
+				return false;
+			} else if(maze[x][y].rightWall) {
+				return false;
+			} else {
+				return true;
+			}
+			break;
+		case DOWN:
+			if(y == heightMaze - 1) {
+				return false;
+			} else if(maze[x][y].downWall) {
+				return false;
+			} else {
+				return true;
+			}
+			break;
+		case LEFT:
+			if(x == 0) {
+				return false;
+			} else if(maze[x-1][y].rightWall) {
+				return false;
+			} else {
+				return true;
+			}
+			break;
+		case UP:
+			if(y == 0) {
+				return false;
+			} else if(maze[x][y-1].downWall) {
+				return false;
+			} else {
+				return true;
+			}
+			break;
+	}
+	return false;
+}
+
+void SquareMaze::setWall(int x, int y, int dir, bool exists) {
+	if(dir == 0) {
+		maze[x][y].rightWall = exists;
+	} else if(dir == 1){
+		maze[x][y].downWall = exists;
+	}
+}
+
+vector<int> SquareMaze::solveMaze() {
+	for(int i = 0; i < widthMaze; i++) {
+		for(int j = 0; j < widthMaze; j++){
+			maze[i][j].visited = false;
+		}
+	}
+
+	vector<int> parent(widthMaze*heightMaze, - 1);
+	vector<int> length(widthMaze*heightMaze, 0);
+
+	queue<int> bfsQueue;
+	bfsQueue.push(0);
+
+	maze[0][0].visited = true;
+	int posX = 0;
+	int posY = 0;
+
+	int ahead;
+	while(!bfsQueue.empty()) {
+		ahead = bfsQueue.front();
+
+		bfsQueue.pop();
+
+		posX = ahead%heightMaze;
+		posY = ahead/heightMaze;
+
+		if(canTravel(posX,posY,RIGHT) && maze[posX + 1][posY].visited == 0) {
+			parent[ahead + 1] = ahead;
+			length[ahead + 1] = length[ahead] + 1;
+
+			maze[posX + 1][posY].visited = true;
+
+			bfsQueue.push(ahead + 1);
+		}
+
+		if(canTravel(posX,posY,DOWN) && maze[posX][posY + 1].visited == 0) {
+			parent[ahead + heightMaze] = ahead;
+			length[ahead + heightMaze] = length[ahead] + 1;
+
+			maze[posX][posY + 1].visited = true;
+
+			bfsQueue.push(ahead + heightMaze);
+		}
+
+		if(canTravel(posX,posY,LEFT) && maze[posX - 1][posY].visited == 0) {
+			parent[ahead - 1] = ahead;
+			length[ahead - 1] = length[ahead] + 1;
+
+			maze[posX - 1][posY].visited = true;
+
+			bfsQueue.push(ahead - 1);
+		}
+
+		if(canTravel(posX,posY,UP) && maze[posX][posY - 1].visited == 0) {
+			parent[ahead - heightMaze] = ahead;
+			length[ahead - heightMaze] = length[ahead] + 1;
+
+			maze[posX][posY - 1].visited = true;
+
+			bfsQueue.push(ahead - heightMaze);
+		}
+	}
+
+	// int m = widthMaze * heightMaze - widthMaze;
+
+	// for(int i = 1; i < widthMaze; i++) {
+	// 	if(length[(widthMaze * heightMaze) - widthMaze + i] > length[max]) {
+	// 		max = (widthMaze * heightMaze) - widthMaze + i;
+	// 	}
+	// }
+
+	int m = widthMaze*heightMaze-widthMaze;
+	
+	for(int i = 1; i < widthMaze; i++)
+	{
+		if(length[(widthMaze*heightMaze)-widthMaze + i] > length[m])
+		{
+			m = (widthMaze*heightMaze)- widthMaze + i;
+		}	
+	}
+
+	int previous = m;
+	vector<int> dir;
+	while(parent[previous] != -1) {
+		if(parent[previous] == previous + 1) {
+			dir.insert(dir.begin(), 2);
+			previous = parent[previous];
+		}
+		if(parent[previous] == previous - 1) {
+			dir.insert(dir.begin(), 0);
+			previous = parent[previous];
+		}
+		if(parent[previous] == previous + heightMaze) {
+			dir.insert(dir.begin(), 3);
+			previous = parent[previous];
+		}
+		if(parent[previous] == previous - heightMaze) {
+			dir.insert(dir.begin(), 1);
+			previous = parent[previous];
+		}
+	}
+
+	max = m;
+	return dir;
+}
+
+PNG* SquareMaze::drawMaze() const {
+	int imgWidth = widthMaze*10+1;
+	int imgHeight = heightMaze*10+1;
+	PNG* ret = new PNG(imgWidth, imgHeight);
+
+	//Set top edge
+	for(int i = 0; i < imgWidth; i++) {
+		if(i > 0 && i < 10) {
+			//Do nothing...
+		} else {
+			*(*ret)(i, 0) = RGBAPixel(0,0,0);
+		}
+	}
+
+	//Set left edge
+	for(int i = 0; i < imgHeight; i++) {
+		*(*ret)(0, i) = RGBAPixel(0,0,0);
+	}
+
+	//Aaaannnnddd draw!
+	for(int i = 0; i < widthMaze; i++) {
+		for(int j = 0; j < heightMaze; j++) {
+			if(maze[i][j].rightWall){
+				for(int k = 0; k < 11; k++) {
+					*(*ret)((i+1)*10, j*10+k) = RGBAPixel(0,0,0);
+				}
+			}
+			if(maze[i][j].downWall){
+				for(int k = 0; k < 11; k++) {
+					*(*ret)(i*10+k, (j+1)*10) = RGBAPixel(0,0,0);
+				}
+			}
+		}
+	}
+	return ret;
+}
+
+PNG* SquareMaze::drawMazeWithSolution() {
+	PNG* ret = drawMaze();
+	vector<int> solution = solveMaze();
+
+	int x = 5;
+	int y = 5;
+
+	for(int i = 0; i < (int)solution.size(); i++) {
+		int colorOne = (rand()%(255-0))+0;
+		int colorTwo = (rand()%(255-0))+0;
+		int colorThree = (rand()%(255-0))+0;
+		switch(solution[i]) {
+			case 0:
+				for(int k = 0; k < 11; k++) {
+					for(int j = -3; j < 4; j++) {
+						*(*ret)(x+k, y+j) = RGBAPixel(colorOne,colorTwo,colorThree);
+					}
+				}
+				x = x + 10;
+				break;
+			case 1:
+				for(int k = 0; k < 11; k++) {
+					for(int j = -3; j < 4; j++) {
+						*(*ret)(x+j, y+k) = RGBAPixel(colorOne,colorTwo,colorThree);
+					}
+				}
+				y = y + 10;
+				break;
+			case 2:
+				for(int k = 0; k < 11; k++) {
+					for(int j = -3; j < 4; j++) {
+						*(*ret)(x-k, y+j) = RGBAPixel(colorOne,colorTwo,colorThree);
+					}
+				}
+				x = x - 10;
+				break;
+			case 3:
+				for(int k = 0; k < 11; k++) {
+					for(int j = -3; j < 4; j++) {
+						*(*ret)(x+j, y-k) = RGBAPixel(colorOne,colorTwo,colorThree);
+					}
+				}
+				y = y - 10;
+				break;
+		}
+	}
+
+	for(int i = 0; i < 9; i++){
+		*(*ret)(x-4+i, y + 5) = RGBAPixel(255,255,255);
+	}
+
+	return ret;
+}

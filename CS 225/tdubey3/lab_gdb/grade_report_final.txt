@@ -1,0 +1,175 @@
+Grading revision r16870 by tdubey3, dated 2015-09-25 17:34:43.000786972 -0500 CDT
+Monad Autograder
+Testing lab_gdb at 2015-09-28 00:31:27
+
+"If at first you don't succeed, that's one data point." ~ Randall Munroe
+
+Setting up test environment...
+Compiling...
+================================================================
+
+
+Running tests...
+================================================================
+testInsertFront  . . . . . . . [5 pts]  - passed
+testInsertBack . . . . . . . . [15 pts] - FAILED: unit_tests.cpp:80: List does not match solution
+testDestructor10 (asan)  . . . [10 pts] - FAILED: Memory errors detected by ASAN
+testDestructor37 (asan)  . . . [10 pts] - passed
+testReverse20_size . . . . . . [3 pts]  - passed
+testReverse20  . . . . . . . . [5 pts]  - passed
+testReverse37_size . . . . . . [3 pts]  - passed
+testReverse37  . . . . . . . . [5 pts]  - passed
+testReverse_memory (asan)  . . [4 pts]  - passed
+testReverseEmpty_memory (asan) [5 pts]  - passed
+testReverse20_memory (asan)  . [5 pts]  - passed
+testShuffle20_size . . . . . . [5 pts]  - FAILED: Timed out (1000ms)
+testShuffle20  . . . . . . . . [4 pts]  - FAILED: Timed out (1000ms)
+testShuffle37_size . . . . . . [5 pts]  - passed
+testShuffle37  . . . . . . . . [4 pts]  - FAILED: unit_tests.cpp:80: List does not match solution
+testShuffle_memory (asan)  . . [4 pts]  - FAILED: Memory errors detected by ASAN
+testShuffleEmpty_memory (asan) [3 pts]  - passed
+testShuffle20_memory (asan)  . [5 pts]  - FAILED: Timed out (10000ms)
+
+
+Total score...
+================================================================
+TOTAL SCORE: 53
+
+
+
+Detailed test output...
+================================================================
+----------------------------------------------------------------
+testInsertBack [15 points]
+Result: FAILED: unit_tests.cpp:80: List does not match solution
+Took 0ms (10000ms timeout)
+Output:
+----------------------------------------------------------------
+< 0 >
+
+----------------------------------------------------------------
+testDestructor10 (run under asan) [10 points]
+Result: FAILED: Memory errors detected by ASAN
+Took unknown time (20000ms timeout)
+Output:
+----------------------------------------------------------------
+Running testDestructor10 [worth 10 points, output below]
+< 1 >
+
+=================================================================
+==16220==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 144 byte(s) in 9 object(s) allocated from:
+    #0 0x421d8b in operator new(unsigned long) /dev/shm/225/lm35/src/llvm/projects/compiler-rt/lib/asan/asan_new_delete.cc:62:35
+    #1 0x6513d3 in List<int>::insertBack(int const&) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x6513d3)
+    #2 0x6432e2 in proxy_test::testDestructor10(util::sizedpipestream<512ul>&) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x6432e2)
+    #3 0x4e6ab8 in monad_shared::unit_test_input::execute(util::sizedpipestream<512ul>&) const (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4e6ab8)
+    #4 0x4cdec3 in proxy::test_execution::child_test() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4cdec3)
+    #5 0x4bfa19 in proxy::test_execution::child() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4bfa19)
+    #6 0x4ba2d2 in proxy::RunTests::run_single_test(monad_shared::unit_test_input const&) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4ba2d2)
+    #7 0x4b4267 in proxy::RunTests::run_single_test(char const*) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4b4267)
+    #8 0x4b3407 in proxy::RunTests::execute_by_mode() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4b3407)
+    #9 0x4afb69 in proxy::RunTests::execute() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4afb69)
+    #10 0x4adc70 in main (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4adc70)
+    #11 0x30c001ed5c in __libc_start_main (/lib64/libc.so.6+0x30c001ed5c)
+
+Direct leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x421d8b in operator new(unsigned long) /dev/shm/225/lm35/src/llvm/projects/compiler-rt/lib/asan/asan_new_delete.cc:62:35
+    #1 0x642db1 in proxy_test::testDestructor10(util::sizedpipestream<512ul>&) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x642db1)
+    #2 0x4e6ab8 in monad_shared::unit_test_input::execute(util::sizedpipestream<512ul>&) const (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4e6ab8)
+    #3 0x4cdec3 in proxy::test_execution::child_test() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4cdec3)
+    #4 0x4bfa19 in proxy::test_execution::child() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4bfa19)
+    #5 0x4ba2d2 in proxy::RunTests::run_single_test(monad_shared::unit_test_input const&) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4ba2d2)
+    #6 0x4b4267 in proxy::RunTests::run_single_test(char const*) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4b4267)
+    #7 0x4b3407 in proxy::RunTests::execute_by_mode() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4b3407)
+    #8 0x4afb69 in proxy::RunTests::execute() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4afb69)
+    #9 0x4adc70 in main (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4adc70)
+    #10 0x30c001ed5c in __libc_start_main (/lib64/libc.so.6+0x30c001ed5c)
+
+Indirect leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x421d8b in operator new(unsigned long) /dev/shm/225/lm35/src/llvm/projects/compiler-rt/lib/asan/asan_new_delete.cc:62:35
+    #1 0x651131 in List<int>::insertBack(int const&) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x651131)
+    #2 0x6432e2 in proxy_test::testDestructor10(util::sizedpipestream<512ul>&) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x6432e2)
+    #3 0x4e6ab8 in monad_shared::unit_test_input::execute(util::sizedpipestream<512ul>&) const (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4e6ab8)
+    #4 0x4cdec3 in proxy::test_execution::child_test() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4cdec3)
+    #5 0x4bfa19 in proxy::test_execution::child() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4bfa19)
+    #6 0x4ba2d2 in proxy::RunTests::run_single_test(monad_shared::unit_test_input const&) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4ba2d2)
+    #7 0x4b4267 in proxy::RunTests::run_single_test(char const*) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4b4267)
+    #8 0x4b3407 in proxy::RunTests::execute_by_mode() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4b3407)
+    #9 0x4afb69 in proxy::RunTests::execute() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4afb69)
+    #10 0x4adc70 in main (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4adc70)
+    #11 0x30c001ed5c in __libc_start_main (/lib64/libc.so.6+0x30c001ed5c)
+
+SUMMARY: AddressSanitizer: 176 byte(s) leaked in 11 allocation(s).
+Result: FAILED:
+Memory Leaks Detected by ASAN
+
+----------------------------------------------------------------
+testShuffle20_size [5 points]
+Result: FAILED: Timed out (1000ms)
+Took 1000ms (1000ms timeout)
+Output:
+----------------------------------------------------------------
+
+----------------------------------------------------------------
+testShuffle20 [4 points]
+Result: FAILED: Timed out (1000ms)
+Took 1000ms (1000ms timeout)
+Output:
+----------------------------------------------------------------
+
+----------------------------------------------------------------
+testShuffle37 [4 points]
+Result: FAILED: unit_tests.cpp:80: List does not match solution
+Took 0ms (1000ms timeout)
+Output:
+----------------------------------------------------------------
+< 1 20 2 21 3 22 4 23 5 24 6 25 7 26 8 27 9 28 10 29 11 30 12 31 13 32 14 33 15 34 16 35 17 36 18 37 >
+
+----------------------------------------------------------------
+testShuffle_memory (run under asan) [4 points]
+Result: FAILED: Memory errors detected by ASAN
+Took unknown time (10000ms timeout)
+Output:
+----------------------------------------------------------------
+Running testShuffle_memory [worth 4 points, output below]
+< 1 6 2 7 3 8 4 9 >
+
+=================================================================
+==16255==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x421d8b in operator new(unsigned long) /dev/shm/225/lm35/src/llvm/projects/compiler-rt/lib/asan/asan_new_delete.cc:62:35
+    #1 0x650a13 in List<int>::insertFront(int const&) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x650a13)
+    #2 0x6488e3 in testShuffle(int, check_t, bool) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x6488e3)
+    #3 0x64b1b4 in proxy_test::testShuffle_memory(util::sizedpipestream<512ul>&) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x64b1b4)
+    #4 0x4e6ab8 in monad_shared::unit_test_input::execute(util::sizedpipestream<512ul>&) const (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4e6ab8)
+    #5 0x4cdec3 in proxy::test_execution::child_test() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4cdec3)
+    #6 0x4bfa19 in proxy::test_execution::child() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4bfa19)
+    #7 0x4ba2d2 in proxy::RunTests::run_single_test(monad_shared::unit_test_input const&) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4ba2d2)
+    #8 0x4b4267 in proxy::RunTests::run_single_test(char const*) (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4b4267)
+    #9 0x4b3407 in proxy::RunTests::execute_by_mode() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4b3407)
+    #10 0x4afb69 in proxy::RunTests::execute() (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4afb69)
+    #11 0x4adc70 in main (/dev/shm/cs225student/autograder/monad/monad/lab_gdb_grade/proxy-asan+0x4adc70)
+    #12 0x30c001ed5c in __libc_start_main (/lib64/libc.so.6+0x30c001ed5c)
+
+SUMMARY: AddressSanitizer: 16 byte(s) leaked in 1 allocation(s).
+Result: FAILED:
+Memory Leaks Detected by ASAN
+
+----------------------------------------------------------------
+testShuffle20_memory (run under asan) [5 points]
+Result: FAILED: Timed out (10000ms)
+Took unknown time (10000ms timeout)
+Output:
+----------------------------------------------------------------
+Running testShuffle20_memory [worth 5 points, output below]
+Result: FAILED:
+Timed out (10000ms)
+
+
+----------------------------------------------------------------
+Total score...
+================================================================
+TOTAL SCORE: 53
+

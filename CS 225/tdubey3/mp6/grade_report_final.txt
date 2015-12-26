@@ -1,0 +1,82 @@
+Grading revision r44016 by tdubey3, dated 2015-11-17 14:42:56.000228493 -0600 CST
+Monad Autograder
+Testing mp6 at 2015-11-18 00:43:13
+
+"Ridiculous!" ~ Kyle Johnson
+
+Setting up test environment...
+Compiling...
+================================================================
+
+
+Running tests...
+================================================================
+testSmallerDimVal . . . . . [3 pts]  - passed
+testShouldReplace . . . . . [3 pts]  - passed
+testLinearCtor_1_10 . . . . [4 pts]  - passed
+testLinearCtor_3_31 . . . . [4 pts]  - passed
+testLinearCtor_2_14 . . . . [4 pts]  - passed
+testLinearNNS_1_10  . . . . [4 pts]  - passed
+testLinearNNS_3_31  . . . . [4 pts]  - passed
+testLinearNNS_2_14  . . . . [4 pts]  - passed
+testDeceptiveNNOneLevelCtor [4 pts]  - passed
+testDeceptiveNNOneLevelNNS  [3 pts]  - passed
+testMinesCtor . . . . . . . [3 pts]  - passed
+testMinesNNS  . . . . . . . [4 pts]  - passed
+testDeceptiveMinesCtor  . . [3 pts]  - passed
+testDeceptiveMinesNNS . . . [5 pts]  - passed
+testTieBreakingCtor . . . . [3 pts]  - passed
+testTieBreakingNNS  . . . . [3 pts]  - FAILED: unit_tests.cpp:322: [tree.findNearestNeighbor(target) => (50, 50, 0)] != [expected => (0, 100, 0)]
+testLeftRecurseCtor . . . . [3 pts]  - passed
+testLeftRecurseNNS  . . . . [3 pts]  - passed
+testRandom1Ctor . . . . . . [3 pts]  - passed
+testRandom1NNS  . . . . . . [3 pts]  - passed
+testRandom2Ctor . . . . . . [3 pts]  - passed
+testRandom2NNS  . . . . . . [3 pts]  - passed
+testCheckeredMosaic . . . . [12 pts] - FAILED: unit_tests.cpp:485: Assertion (canvas->drawMosaic(10) == soln_testmaptiles) failed
+testPrimaryColorMosaic  . . [6 pts]  - FAILED: unit_tests.cpp:519: [canvas->getTile(0, 1).getAverageColor() => (191,191,64)] != [RGBAPixel(64, 191, 64) => (64,191,64)]
+testRandomMosaic  . . . . . [6 pts]  - FAILED: unit_tests.cpp:583: [canvas->getTile(0, 3).getAverageColor() => (162,173,205)] != [RGBAPixel(99,200,238) => (99,200,238)]
+
+
+Total score...
+================================================================
+TOTAL SCORE: 73
+
+
+
+Detailed test output...
+================================================================
+----------------------------------------------------------------
+testTieBreakingNNS [3 points]
+Result: FAILED: unit_tests.cpp:322: [tree.findNearestNeighbor(target) => (50, 50, 0)] != [expected => (0, 100, 0)]
+Took 0ms (5000ms timeout)
+Output:
+----------------------------------------------------------------
+
+----------------------------------------------------------------
+testCheckeredMosaic [12 points]
+Result: FAILED: unit_tests.cpp:485: Assertion (canvas->drawMosaic(10) == soln_testmaptiles) failed
+Took 13ms (5000ms timeout)
+Output:
+----------------------------------------------------------------
+
+----------------------------------------------------------------
+testPrimaryColorMosaic [6 points]
+Result: FAILED: unit_tests.cpp:519: [canvas->getTile(0, 1).getAverageColor() => (191,191,64)] != [RGBAPixel(64, 191, 64) => (64,191,64)]
+Took 0ms (5000ms timeout)
+Output:
+----------------------------------------------------------------
+
+----------------------------------------------------------------
+testRandomMosaic [6 points]
+Result: FAILED: unit_tests.cpp:583: [canvas->getTile(0, 3).getAverageColor() => (162,173,205)] != [RGBAPixel(99,200,238) => (99,200,238)]
+Took 0ms (5000ms timeout)
+Output:
+----------------------------------------------------------------
+
+
+----------------------------------------------------------------
+Total score...
+================================================================
+TOTAL SCORE: 73
+

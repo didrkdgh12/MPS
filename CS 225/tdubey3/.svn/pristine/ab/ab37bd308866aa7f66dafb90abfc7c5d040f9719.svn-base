@@ -1,0 +1,99 @@
+#ifndef MAZE_H
+#define MAZE_H
+
+#include <vector>
+#include "png.h"
+
+using namespace std;
+
+class SquareMaze {
+	public:
+
+		/**
+		 * Makes a new SquareMaze of the given height and width with the following algorithm:
+		 * 	1. Start with a grid full of walls
+		 * 	2. Pick a random cell, and mark it as part of the maze. Add the walls of that cell to a list
+		 * 	3. While there are walls in the list:
+		 * 		1. Pick a random wall from the list and a random direction. If the cell in that direction isn't in the maze:
+		 * 			1. Make the wall a passage and marke the cell on the opposite side as part of the maze
+		 * 			2. Add the neighboring walls of the cell to the wall list.
+		 * 		2. Remove the wall from the list
+		 * 		
+		 * @param width  The witdh of the SquareMaze (Number of cells)
+		 * @param height The height of the SquareMaze (Number of cells)
+		 */
+		void makeMaze(int width, int height);
+
+		/**
+		 * Determins of it's possible to travel in a given direction
+		 * @param  x   The X coordinate of the current cell
+		 * @param  y   The Y coordinate of the current cell
+		 * @param  dir The desired direction to move from the current cell
+		 * @return     Whether you can travel in the specified direction
+		 */
+		bool canTravel(int x, int y, int dir) const;
+
+		/**
+		 * Sets whether or not the specified wall exists
+		 * @param x      The X coordinate of the current cell
+		 * @param y      The Y coordinate of teh current cell
+		 * @param dir    Either 0 (right) or 1 (down) which specifies which wall to set
+		 * @param exists True if setting the wall to exist, false otherwise
+		 */
+		void setWall(int x, int y, int dir, bool exists);
+
+		/**
+		 * Solves the SquareMaze
+		 * @return A vector of the solved maze
+		 */
+		vector<int> solveMaze();
+
+		/**
+		 * Draws the maze without the solution
+		 * @return A PNG of the unsolved SquareMaze
+		 */
+		PNG* drawMaze() const;
+
+		/**
+		 * Calls drawMaze, then solveMaze; it modifies the PNG from drawMAze to show the solution vector and the exist
+		 * @return [description]
+		 */
+		PNG* drawMazeWithSolution();
+
+	private:
+
+		/**
+		 * Width of the Maze
+		 */
+		int widthMaze;
+
+		/**
+		 * Height of the Maze
+		 */
+		int heightMaze;
+
+		/**
+		 * Vector for holding the maze
+		 *
+		 * The vector is ordered in such a way:
+		 *
+		 *  3 - Both right and down walls
+		 *  2 - Right wall only
+		 *  1 - Down wall only
+		 *  0 - No walls
+		 *
+		 * Elements are stored in row-major order.
+		 * 
+		 */
+		vector<int> maze;
+
+		/**
+		 * A unbiased random number generator
+		 * @param  min Lower bound of the generator
+		 * @param  max Upper bound of the generator
+		 * @return     Random int between bounds
+		 */
+		int rangeRandom (int min, int max);
+};
+
+#endif // MAZE_H

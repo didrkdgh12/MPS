@@ -1,0 +1,256 @@
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <cstdlib>
+#include <iostream>
+#include <sys/time.h>
+#include <time.h>
+#include "maze.h"
+#include "dsets.h"
+
+using namespace std;
+
+void SquareMaze::makeMaze(int width, int height) {
+	//Set the width and height of the maze
+	widthMaze = width;
+	heightMaze = height;
+
+	//Fill the maze completely with filled cells
+	for(int i = 0; i < width*height; i++) {
+		maze.push_back(3);
+	}
+
+	//Make a neighbor vector and a visited vector
+	vector<int> frontier;
+	vector<int> visited;
+
+	//Choose a random starting position and add it to visited list
+	int posX = rangeRandom(0, widthMaze);
+	int posY = rangeRandom(0, heightMaze);
+	visited.push_back(widthMaze * posX + posY);
+	cout << "Staring at : " << posX << ", " << posY << endl;
+
+	//Add the frontier of the starting cell to the neighbor list
+	for(int i = 0; i < 4; i++) {
+		switch(i){
+			case 0:
+				//Right
+				if(((widthMaze * (posX + 1) + posY) < widthMaze * heightMaze) || ((widthMaze * (posX + 1) + posY) > 0)) {
+					frontier.push_back(widthMaze * (posX + 1) + posY);
+					cout << "Right Main Front Found" << endl;
+				}
+				break;
+			case 1:
+				//Down
+				if(((widthMaze * posX + (posY + 1)) < widthMaze * heightMaze) || ((widthMaze * (posX + 1) + posY) > 0)) {
+					frontier.push_back(widthMaze * posX + (posY + 1));
+					cout << "Down Main Front Found" << endl;
+				}
+				break;
+			case 2:
+				//Left
+				if(((widthMaze * (posX - 1) + posY) < widthMaze * heightMaze) || ((widthMaze * (posX + 1) + posY) > 0)) {
+					frontier.push_back(widthMaze * (posX - 1) + posY);
+					cout << "Left Main Front Found" << endl;
+				}
+				break;
+			case 3:
+				//Up
+				if(((widthMaze * posX + (posY - 1)) < widthMaze * heightMaze) || ((widthMaze * (posX + 1) + posY) > 0)) {
+					frontier.push_back(widthMaze * posX + (posY - 1));
+					cout << "Up Main Front Found" << endl;
+				}
+				break;
+		}
+	}
+
+	while(!frontier.empty()) {
+		//Choose a random frontier cell
+		int randFrontCellIndex = rangeRandom(0, frontier.size()-1);
+		int randFrontierCell  = frontier[randFrontCellIndex];
+		int adjecentDirection;
+		int frontierCellAdjIndex;
+
+		//Find a random cell adjecent to the picked frontier cell that is in our visited list
+		bool foundAdjacent = false;
+		while(!foundAdjacent) {
+			int dir = rangeRandom(0, 3);
+			switch(dir){
+				case 0:
+					//Right
+					if(std::find(visited.begin(), visited.end(), randFrontierCell + 1) != visited.end()) {
+						frontierCellAdjIndex = randFrontierCell + 1;
+						adjecentDirection = 0;
+						foundAdjacent = true;
+						cout << "Right adjecent Found" << endl;
+					}
+					break;
+				case 1:
+					//Down
+					if(std::find(visited.begin(), visited.end(), randFrontierCell + widthMaze) != visited.end()) {
+						frontierCellAdjIndex = randFrontierCell + widthMaze;
+						adjecentDirection = 1;
+						foundAdjacent = true;
+						cout << "Down adjecent Found" << endl;
+					}
+					break;
+				case 2:
+					//Left
+					if(std::find(visited.begin(), visited.end(), randFrontierCell - 1) != visited.end()) {
+						frontierCellAdjIndex = randFrontierCell - 1;
+						adjecentDirection = 2;
+						foundAdjacent = true;
+						cout << "Left adjecent Found" << endl;
+					}
+					break;
+				case 3:
+					//Up
+					if(std::find(visited.begin(), visited.end(), randFrontierCell - widthMaze) != visited.end()) {
+						frontierCellAdjIndex = randFrontierCell - widthMaze;
+						adjecentDirection = 3;
+						foundAdjacent = true;
+						cout << "Up adjecent Found" << endl;
+					}
+					break;
+			}
+		}
+		//Add our frontier cell to the visited cells
+		visited.push_back(randFrontierCell);
+
+		//Add the frontiers of our frontier cell to the frontier vector
+		for(int i = 0; i < 4; i++) {
+			switch(i){
+				case 0:
+					//Right
+					if(randFrontierCell + 1 > widthMaze * heightMaze || randFrontierCell + 1 < 0)
+						if(std::find(visited.begin(), visited.end(), randFrontierCell + 1) == visited.end())
+							if(std::find(frontier.begin(), frontier.end(), randFrontierCell + 1) == frontier.end())
+								frontier.push_back(randFrontierCell + 1);
+					break;
+				case 1:
+					//Down
+					if(randFrontierCell + 1 > widthMaze * heightMaze || randFrontierCell + 1 < 0)
+						if(std::find(visited.begin(), visited.end(), randFrontierCell + widthMaze) == visited.end())
+							if(std::find(frontier.begin(), frontier.end(), randFrontierCell + widthMaze) == frontier.end())
+							frontier.push_back(randFrontierCell + widthMaze);
+					break;
+				case 2:
+					//Left
+					if(randFrontierCell + 1 > widthMaze * heightMaze || randFrontierCell + 1 < 0)
+						if(std::find(visited.begin(), visited.end(), randFrontierCell - 1) == visited.end())
+							if(std::find(frontier.begin(), frontier.end(), randFrontierCell - 1) == frontier.end())
+								frontier.push_back(randFrontierCell - 1);
+					break;
+				case 3:
+					//Up
+					if(randFrontierCell + 1 > widthMaze * heightMaze || randFrontierCell + 1 < 0)
+						if(std::find(visited.begin(), visited.end(), randFrontierCell - widthMaze) == visited.end())
+							if(std::find(frontier.begin(), frontier.end(), randFrontierCell - widthMaze) == frontier.end())
+								frontier.push_back(randFrontierCell - widthMaze);
+					break;
+			}
+		}
+
+		//Make A path between the frontier cell and our current cell. 
+		switch(adjecentDirection) {
+			case 0:
+				//Right
+				maze[randFrontierCell] = 1;
+				break;
+			case 1:
+				//Down
+				maze[randFrontierCell] = 2;
+				break;
+			case 2:
+				//Left
+				maze[randFrontierCell - 1] = 1; 
+				break;
+			case 3:
+				//Up
+				maze[randFrontierCell - widthMaze] = 2;
+				break;
+		}
+
+		//Remove our frontier cell from the list
+		frontier.erase(frontier.begin() + randFrontCellIndex);
+	}
+}
+
+bool SquareMaze::canTravel(int x, int y, int dir) const {
+	return false;
+}
+
+void SquareMaze::setWall(int x, int y, int dir, bool exists) {
+	return;
+}
+
+vector<int> SquareMaze::solveMaze() {
+	return vector<int>();
+}
+
+PNG* SquareMaze::drawMaze() const {
+	int imgWidth = widthMaze*10+1
+;	int imgHeight = heightMaze*10+1;
+	PNG* ret = new PNG(imgWidth, imgHeight);
+
+	//Set top edge
+	for(int i = 0; i < imgWidth; i++) {
+		if(i > 0 && i < 10) {
+			//Do nothing...
+		} else {
+			*(*ret)(i, 0) = RGBAPixel(0,0,0);
+		}
+	}
+
+	//Set left edge
+	for(int i = 0; i < imgHeight; i++) {
+		*(*ret)(0, i) = RGBAPixel(0,0,0);
+	}
+
+	//Aaaannnnddd draw!
+	for(int x = 0; x < widthMaze; x++) {
+		for(int y = 0; y < heightMaze; y++) {
+			int currentIndex = widthMaze * x + y;
+			//Fill in based on type
+			if(maze[currentIndex] == 3) {
+				//Draw both down and right
+				//Right
+				for(int k = 0; k < 11; k++) {
+					*(*ret)((x+1)*10,y*10+k) = RGBAPixel(0,0,0);
+				}
+				//Down
+				for(int k = 0; k < 11; k++) {
+					*(*ret)(x*10+k, (y+1)*10) = RGBAPixel(0,0,0);
+				}
+
+			} else if(maze[currentIndex] == 2) {
+				//Draw right only
+				for(int k = 0; k < 11; k++) {
+					*(*ret)((x+1)*10,y*10+k) = RGBAPixel(0,0,0);
+				}
+			} else if(maze[currentIndex] == 1) {
+				//Draw down only
+				for(int k = 0; k < 11; k++) {
+					*(*ret)(x*10+k, (y+1)*10) = RGBAPixel(0,0,0);
+				}
+			} else {
+				//Do nothing..
+			}
+		}
+	}
+	return ret;
+}
+
+PNG* SquareMaze::drawMazeWithSolution() {
+	return NULL;
+}
+
+int SquareMaze::rangeRandom (int min, int max) {
+    int n = max - min + 1;
+    int remin = RAND_MAX % n;
+    int x;
+    do{
+        x = rand();
+    }while (x >= RAND_MAX - remin);
+    return min + x % n;
+}
